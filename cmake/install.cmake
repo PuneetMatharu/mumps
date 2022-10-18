@@ -2,8 +2,6 @@
 
 include(CMakePackageConfigHelpers)
 
-set(MUMPS_INSTALL_CONFIG_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
-
 configure_package_config_file(
   ${CMAKE_CURRENT_LIST_DIR}/config.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake
