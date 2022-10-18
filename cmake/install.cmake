@@ -11,21 +11,22 @@ write_basic_package_version_file(
   ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}ConfigVersion.cmake
   COMPATIBILITY SameMajorVersion)
 
-install(
+# allow use of package from build directory without installing
+export(
   EXPORT ${PROJECT_NAME}-targets
-  NAMESPACE ${PROJECT_NAME}::
-  DESTINATION ${MUMPS_INSTALL_CONFIG_DIR})
+  FILE ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}-targets.cmake
+  NAMESPACE ${PROJECT_NAME}::)
 
 install(
   FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake
         ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}ConfigVersion.cmake
   DESTINATION ${MUMPS_INSTALL_CONFIG_DIR})
 
-# allow use of package from build directory without installing
-export(
+install(
   EXPORT ${PROJECT_NAME}-targets
-  FILE ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}-targets.cmake
-  NAMESPACE ${PROJECT_NAME}::)
+  NAMESPACE ${PROJECT_NAME}::
+  FILE "${PROJECT_NAME}-targets.cmake"
+  DESTINATION ${MUMPS_INSTALL_CONFIG_DIR})
 
 # --- CPack
 
