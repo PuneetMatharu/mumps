@@ -26,6 +26,7 @@ if(SCALAPACK_FOUND)
 endif()
 
 set(scalapack_cmake_args
+-Dfind_static:BOOL=${find_static}
 -DBUILD_SINGLE:BOOL=${BUILD_SINGLE}
 -DBUILD_DOUBLE:BOOL=${BUILD_DOUBLE}
 -DBUILD_COMPLEX:BOOL=${BUILD_COMPLEX}
@@ -38,6 +39,14 @@ set(scalapack_cmake_args
 -DCMAKE_BUILD_TYPE:STRING=Release
 -DCMAKE_TLS_VERIFY:BOOL=${CMAKE_TLS_VERIFY}
 )
+
+if(LAPACK_ROOT)
+  list(APPEND scalapack_cmake_args -DLAPACK_ROOT:PATH=${LAPACK_ROOT})
+endif()
+
+if(LAPACK_VENDOR)
+  list(APPEND scalapack_cmake_args -DLAPACK_VENDOR:PATH=${LAPACK_VENDOR})
+endif()
 
 file(READ ${CMAKE_CURRENT_LIST_DIR}/libraries.json json)
 
